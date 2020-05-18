@@ -1,0 +1,10 @@
+.center {
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    background: #7ab6b8;
+}
+
+.btn-detect {
+    background: #314eb8;
+}

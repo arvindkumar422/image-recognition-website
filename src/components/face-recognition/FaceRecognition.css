@@ -1,0 +1,16 @@
+.face-box {
+    position: absolute;
+    box-shadow: fuchsia 0 0 0 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.absolute {
+    margin-left: 38%;
+}
+
+.image {
+    border: green 2px;
+}
