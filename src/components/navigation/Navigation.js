@@ -1,28 +1,17 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-const Navigation = ({onRouteChange, routeStatus}) => {
-    if (routeStatus === 'logged_in') {
-        return (
-            <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <p
-                    onClick={() => onRouteChange('signout')}
-                    className='f3 link dim black underline pa3 pointer'>
-                    Sign out
-                </p>
-            </nav>
-        );
-    }
-    else {
-        return (
-            <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <p
-                    onClick={() => onRouteChange('signin')}
-                    className='f3 link dim black underline pa3 pointer'>
-                    Sign in
-                </p>
-            </nav>
-        );
-    }
+const Navigation = () => {
+    return (
+        <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/face">Face</Link></li>
+                <li><Link to="/general">General</Link></li>
+            </ul>
+
+        </nav>
+    );
 }
 
 export default Navigation;
