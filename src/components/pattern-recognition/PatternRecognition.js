@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Clarifai from '../../../node_modules/clarifai';
 import ImageLinkForm from "../image-link-form/ImageLinkForm";
 
-class GeneralRecognition extends Component {
+class PatternRecognition extends Component {
     constructor() {
         super();
         this.state = {
             input: '',
             imageURL: '',
-            concepts: [],
-            route: 'general'
+            pattern: [],
+            route: 'pattern'
         }
     }
 
@@ -25,17 +25,13 @@ class GeneralRecognition extends Component {
                 imageURL: this.state.input
             }
         );
-        this.props.app.models.initModel({ id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40" })
-            .then(generalModel => {
-                return generalModel.predict(this.state.input);
-            })
+        this.props.app.models.predict(Clarifai.TEXTURES_AND_PATTERNS, this.state.input)
             .then(response => {
                 this.setState(
                     {
-                        concepts: response['outputs'][0]['data']['concepts']
+                        pattern: response['outputs'][0]['data']['concepts']
                     }
                 );
-                console.log("general: ", response['outputs'][0]['data']['concepts']);
             })
 
     };
@@ -58,7 +54,7 @@ class GeneralRecognition extends Component {
                                 src={this.state.imageURL} />
                         </div>
                         <div className='col-sm-6'>
-                            {this.state.concepts.map(element => (
+                            {this.state.pattern.map(element => (
                                 <li key={element.id}>
                                     {element.name}
                                 </li>
@@ -73,4 +69,4 @@ class GeneralRecognition extends Component {
 
 };
 
-export default GeneralRecognition;
+export default PatternRecognition;

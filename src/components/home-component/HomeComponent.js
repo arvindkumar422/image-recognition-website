@@ -6,14 +6,14 @@ import Logo from "../logo/Logo";
 import Clarifai from '../../../node_modules/clarifai';
 import FaceRecognition from "../face-recognition/FaceRecognition";
 import GeneralRecognition from "../general-recognition/GeneralRecognition";
-import ImageLinkForm from "../image-link-form/ImageLinkForm";
+import FoodRecognition from "../food-recognition/FoodRecognition";
+import PatternRecognition from "../pattern-recognition/PatternRecognition";
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 let app = new Clarifai.App({
     apiKey: "bd8b930f738e465e9597ee9b8026ffe1"
 });
-
 
 const particlesJson = {
     particles: {
@@ -131,23 +131,28 @@ class HomeComponent extends Component {
                     <Navigation />
                     <Logo />
                     <div>
-                        <ImageLinkForm
-                            onInputChange={this.onInputChange}
-                            onButtonClick={this.onButtonClick} />
                         <Route
                             exact path="/"
                             component={Logo} />
                         <Route
                             path='/face'
                             render={(props) => <FaceRecognition {...props}
-                                box={this.state.box}
-                                imgSource={this.state.imageURL} />}
+                                app={app} />}
                         />
                         <Route
                             path='/general'
                             render={(props) => <GeneralRecognition {...props}
-                                imgSource={this.state.imageURL}
-                                concepts={this.state.concepts} />}
+                                app={app} />}
+                        />
+                        <Route
+                            path='/food'
+                            render={(props) => <FoodRecognition {...props}
+                                app={app} />}
+                        />
+                        <Route
+                            path='/pattern'
+                            render={(props) => <PatternRecognition {...props}
+                                app={app} />}
                         />
                     </div>
                 </Router>
