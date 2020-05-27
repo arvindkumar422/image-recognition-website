@@ -1,17 +1,30 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import './Navigation.css';
 
 const Navigation = () => {
     return (
-        <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/face">Face</Link></li>
-                <li><Link to="/general">General</Link></li>
-                <li><Link to="/food">Food</Link></li>
-                <li><Link to="/pattern">Patterns</Link></li>
-            </ul>
-
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="#">Navbar w/ text</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarText">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Features</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+                <span className="navbar-text">
+                    Navbar text with an inline element
+                </span>
+            </div>
         </nav>
     );
 }

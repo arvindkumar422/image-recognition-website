@@ -8,3 +8,19 @@
 .btn-detect {
     background: #314eb8;
 }
+
+.centerInfo {
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    background: #d1ccc6;
+    margin-top: 14px;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem;
+}

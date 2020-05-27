@@ -45,9 +45,10 @@ class GeneralRecognition extends Component {
             <div>
                 <ImageLinkForm
                     onInputChange={this.onInputChange}
-                    onButtonClick={this.onButtonClick} />
-                <div className='absolute mt2'>
-                    <div className="row">
+                    onButtonClick={this.onButtonClick}
+                    infoToDetect='general things!' />
+                <div>
+                    <div className="centerImg pa4 br3 shadow-5">
                         <div className="col-sm-6">
                             <img
                                 className='image'
@@ -57,12 +58,24 @@ class GeneralRecognition extends Component {
                                 height='auto'
                                 src={this.state.imageURL} />
                         </div>
-                        <div className='col-sm-6'>
-                            {this.state.concepts.map(element => (
-                                <li key={element.id}>
-                                    {element.name}
-                                </li>
-                            ))}
+                        <div className='col-sm-6 details-col'>
+                            <section className="model-section">
+                                <ul className="unordered-list">
+                                    <li className="model-container-tag-list-column">
+                                        <h3>Predicted concept</h3>
+                                        <h3>Probability</h3>
+                                    </li>
+                                    {this.state.concepts.map(element => (
+                                        <li className="model-container-tag-list-item" key={element.id}>
+                                            <span className="predicted-concept-name" title={element.name}>{element.name}</span>
+                                            <span className="predicted-concept-name"
+                                                title={Math.floor(100 * element.value) > 0 ? Math.floor(100 * element.value) + ' %' : '< 1%'}>
+                                                {Math.floor(100 * element.value) > 0 ? Math.floor(100 * element.value) + ' %' : '< 1%'}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
                         </div>
                     </div>
 

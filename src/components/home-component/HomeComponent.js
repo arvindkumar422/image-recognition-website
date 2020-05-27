@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './HomeComponent.css'
 import Particles from 'react-particles-js';
 import Navigation from '../navigation/Navigation'
@@ -10,6 +10,7 @@ import FoodRecognition from "../food-recognition/FoodRecognition";
 import PatternRecognition from "../pattern-recognition/PatternRecognition";
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import OptionPills from '../option-pills/OptionPills';
 
 let app = new Clarifai.App({
     apiKey: "bd8b930f738e465e9597ee9b8026ffe1"
@@ -129,7 +130,7 @@ class HomeComponent extends Component {
                 <Particles className='particles' params={particlesJson} />
                 <Router>
                     <Navigation />
-                    <Logo />
+                    <OptionPills />
                     <div>
                         <Route
                             exact path="/"
