@@ -8,6 +8,7 @@ class FaceRecognition extends Component {
 
     constructor() {
         super();
+        this.url = "http://127.0.0.1:5000"
         this.state = {
             input: '',
             imageURL: '',
@@ -29,21 +30,34 @@ class FaceRecognition extends Component {
                 imageURL: this.state.input
             }
         );
-        this.props.app.models.predict(Clarifai.FACE_DETECT_MODEL,
-            this.state.input).then(
-                response => {
-                    this.setBox(this.calculateFaceBox(response)
-                    )
-                }
-            ).catch(error => console.log(error));
+
+        const a = fetch("http://127.0.0.1:5000/getFaceRect", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+            body: JSON.stringify({
+                imgUrl: this.state.input
+            })
+
+        }).then(response => response.json())
+            .then(jsondata => this.setBox(this.calculateFaceBox(jsondata)))
+            .catch(error => console.log(error));;
+
+        // this.props.app.models.predict(Clarifai.FACE_DETECT_MODEL,
+        //     this.state.input).then(
+        //         response => {
+        //             this.setBox(this.calculateFaceBox(response)
+        //             )
+        //         }
+        //     ).catch(error => console.log(error));
 
     };
 
     calculateFaceBox = (data) => {
         let boxes = [];
-        data.outputs[0].data.regions.forEach(
+        data.forEach(
             (element) => {
-                const face = element.region_info.bounding_box
+                console.log("element:", element);
+                const face = element
                 const image = document.getElementById("image")
                 const width = Number(image.width)
                 const height = Number(image.height)
@@ -177,7 +191,7 @@ class FaceRecognition extends Component {
                                     </section>
                                     :
                                     <p>
-                                       Please use a picture containing a maximum of one face to compute demographics.
+                                        Please use a picture containing a maximum of one face to compute demographics.
                                     </p>
 
                             }
