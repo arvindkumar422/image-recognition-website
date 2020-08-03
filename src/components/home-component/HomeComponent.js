@@ -129,7 +129,6 @@ class HomeComponent extends Component {
             <div>
                 <Particles className='particles' params={particlesJson} />
                 <Router>
-                    <Navigation />
                     <OptionPills />
                     <div>
                         <Route

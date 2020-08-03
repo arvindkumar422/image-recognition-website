@@ -22,7 +22,7 @@ class OptionPills extends Component {
 
     render() {
         return (
-            <div>
+            <div className="nav-div">
                 <nav className="nav nav-pills nav-fill centerPills">
                     <Link to="/" className={this.state.active === 'home' ? 'active nav-item nav-link' : 'nav-item nav-link option-item'}
                         onClick={() => this.toggleClass('home')}>Home</Link>
