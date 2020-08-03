@@ -10,12 +10,18 @@ class FaceRecognition extends Component {
         super();
         this.url = "http://127.0.0.1:5000"
         this.state = {
-            input: '',
+            input: 'https://www.vbetnews.com/wp-content/uploads/2020/04/1193140713-1.jpg.0-1200x800-min-1.jpg',
             imageURL: '',
             boxes: [],
             demographics: { age: [], gender: [] },
-            route: 'face'
+            route: 'face',
+            model: 'clarifai',
+            single: false
         }
+    }
+
+    componentDidMount() {
+        this.onButtonClick();
     }
 
     onInputChange = (event) => {
@@ -24,6 +30,40 @@ class FaceRecognition extends Component {
         })
     };
 
+    onChangeModel = (event) => {
+        this.setState({
+            model: event.target.value
+        }, () => {
+            this.executeModel()
+        });
+    }
+
+    executeModel = () => {
+        if (this.state.model == 'opencv') {
+            const a = fetch(global.config.apiUrl + "getFaceRect", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+                body: JSON.stringify({
+                    imgUrl: this.state.input
+                })
+
+            }).then(response => response.json())
+                .then(jsondata => this.setBox(this.calculateFaceBox(jsondata)))
+                .catch(error => console.log(error));
+        }
+        else {
+            this.props.app.models.predict(Clarifai.FACE_DETECT_MODEL,
+                this.state.input).then(
+                    response => {
+                        //console.log(response.outputs[0].data.regions);
+                        this.setBox(this.calculateFaceBox(response.outputs[0].data.regions)
+                        )
+                    }
+                ).catch(error => console.log(error));
+
+        }
+    }
+
     onButtonClick = () => {
         this.setState(
             {
@@ -31,24 +71,7 @@ class FaceRecognition extends Component {
             }
         );
 
-        const a = fetch("http://127.0.0.1:5000/getFaceRect", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-            body: JSON.stringify({
-                imgUrl: this.state.input
-            })
-
-        }).then(response => response.json())
-            .then(jsondata => this.setBox(this.calculateFaceBox(jsondata)))
-            .catch(error => console.log(error));;
-
-        // this.props.app.models.predict(Clarifai.FACE_DETECT_MODEL,
-        //     this.state.input).then(
-        //         response => {
-        //             this.setBox(this.calculateFaceBox(response)
-        //             )
-        //         }
-        //     ).catch(error => console.log(error));
+        this.executeModel();
 
     };
 
@@ -57,7 +80,7 @@ class FaceRecognition extends Component {
         data.forEach(
             (element) => {
                 console.log("element:", element);
-                const face = element
+                const face = this.state.model === 'opencv' ? element : element.region_info.bounding_box
                 const image = document.getElementById("image")
                 const width = Number(image.width)
                 const height = Number(image.height)
@@ -73,7 +96,15 @@ class FaceRecognition extends Component {
         );
         //console.log("boxes : ", boxes);
         if (boxes.length === 1) {
+            this.setState({
+                single: true
+            });
             this.calculateDemographics();
+        }
+        else {
+            this.setState({
+                single: false
+            });
         }
         return boxes;
     }
@@ -125,8 +156,11 @@ class FaceRecognition extends Component {
         return (
             <div>
                 <ImageLinkForm
+                    input={this.state.input}
+                    onChangeModel={this.onChangeModel}
                     onInputChange={this.onInputChange}
                     onButtonClick={this.onButtonClick}
+                    selectedModel={this.state.model}
                     infoToDetect='face(s) !' />
                 <div>
                     <div className="centerImg pa4 br3 shadow-5">
@@ -153,7 +187,7 @@ class FaceRecognition extends Component {
                         </div>
                         <div className="col-sm-6 details-col">
                             {
-                                this.state.demographics.age.length > 0 ?
+                                this.state.single ?
                                     <section className="model-section">
                                         <ul className="unordered-list">
                                             <li className="model-container-tag-list-column">

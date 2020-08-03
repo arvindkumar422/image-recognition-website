@@ -1,8 +1,11 @@
 .center {
-    display: flex;
     justify-content: center;
     width: 1000px;
     background: #7ab6b8;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
 }
 
 .btn-detect {
@@ -23,4 +26,32 @@
 p {
     margin-top: 1rem !important;
     margin-bottom: 1rem;
+}
+
+.model-select {
+    display: inline-block;
+    
+}
+
+.model-select-btns {
+    margin-left: 2vh;
+    margin-right: 1vh;
+}
+
+.model-buttons {
+    display: flex;
+}
+
+.model-row-selection {
+    margin-top: 1vh;
+}
+
+.model-text {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.nav-item {
+    margin-right: 2vh;
 }

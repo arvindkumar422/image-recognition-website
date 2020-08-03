@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './config';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

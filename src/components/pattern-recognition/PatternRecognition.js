@@ -7,11 +7,15 @@ class PatternRecognition extends Component {
     constructor() {
         super();
         this.state = {
-            input: '',
+            input: 'https://www.featurepics.com/StockImage/20141121/fractal-spiral-pattern-stock-photo-3357231.jpg',
             imageURL: '',
             pattern: [],
             route: 'pattern'
         }
+    }
+
+    componentDidMount() {
+        this.onButtonClick();
     }
 
     onInputChange = (event) => {
@@ -19,6 +23,10 @@ class PatternRecognition extends Component {
             input: event.target.value
         })
     };
+
+    onChangeModel = () => {
+        
+    }
 
     onButtonClick = () => {
         this.setState(
@@ -42,9 +50,12 @@ class PatternRecognition extends Component {
         return (
             <div>
                 <ImageLinkForm
+                    input={this.state.input}
+                    onChangeModel={this.onChangeModel}
                     onInputChange={this.onInputChange}
                     onButtonClick={this.onButtonClick} 
-                    infoToDetect='patterns !' />
+                    selectedModel={this.state.model}
+                    infoToDetect='patterns' />
                 <div className="centerImg pa4 br3 shadow-5">
                     <div className="col-sm-6">
                         <img
