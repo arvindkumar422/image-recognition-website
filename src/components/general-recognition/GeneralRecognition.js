@@ -6,7 +6,7 @@ class GeneralRecognition extends Component {
     constructor() {
         super();
         this.state = {
-            input: 'https://resources.premierleague.com/premierleague/photo/2018/02/27/9c527724-52d1-40f1-bd34-029905437199/GettyImages-923742338.jpg',
+            input: 'https://i.insider.com/5ea6deda5bd7a56cf6782a13?width=1136&format=jpeg',
             imageURL: '',
             concepts: [],
             route: 'general',

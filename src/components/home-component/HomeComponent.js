@@ -11,6 +11,7 @@ import PatternRecognition from "../pattern-recognition/PatternRecognition";
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import OptionPills from '../option-pills/OptionPills';
+import HomeText from '../home-text/home-text';
 
 let app = new Clarifai.App({
     apiKey: "bd8b930f738e465e9597ee9b8026ffe1"
@@ -133,7 +134,7 @@ class HomeComponent extends Component {
                     <div>
                         <Route
                             exact path="/"
-                            component={Logo} />
+                            component={HomeText} />
                         <Route
                             path='/face'
                             render={(props) => <FaceRecognition {...props}

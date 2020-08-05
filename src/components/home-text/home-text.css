@@ -1,0 +1,15 @@
+.home-text {
+    background: antiquewhite;
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1%;
+    padding: 1%;
+    border-radius: 20px;
+}
+
+.hometextp {
+    color: #a11515
+}

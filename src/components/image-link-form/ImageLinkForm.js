@@ -6,7 +6,7 @@ const ImageLinkForm = ({ input, onInputChange, onButtonClick, infoToDetect, onCh
         <div>
             <div className='centerInfo'>
                 <p className='f4'>
-                    Enter URL of any picture to detect {infoToDetect}
+                    Paste the URL of a picture in the text field below to detect {infoToDetect}
                 </p>
             </div>
 
